@@ -13,7 +13,7 @@ Before deploying, ensure you have:
 ## Part 1: Commit Changes to Git
 
 ```powershell
-cd "c:\Users\Sreelekha Korlepara\Products\HueGrab"
+cd <your-project-directory>
 git add .
 git commit -m "feat: Add haptic feedback and capture animation with final polish
 

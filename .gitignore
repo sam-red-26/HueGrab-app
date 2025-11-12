@@ -1,0 +1,34 @@
+# HueGrab Repository
+node_modules/
+.DS_Store
+*.log
+
+# Vercel
+.vercel/
+website/.vercel/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Development artifacts - not needed in public repo
+Conductor.agent.md
+*-subagent.agent.md
+code-review-subagent.agent.md
+implement-subagent.agent.md
+planning-subagent.agent.md
+copilot-orchestra/
+plans/
+RESEARCH_FINDINGS.md
+PATH_GUIDE.md

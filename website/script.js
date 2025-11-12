@@ -12,32 +12,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Update download links when builds are ready
-// Replace these URLs with actual build download URLs after building
+// Download URL is set directly in HTML
 const ANDROID_APK_URL = 'https://github.com/sam-red-26/HueGrab-app/releases/download/HueGrab_v1.0.0/HueGrab_android_1.0.apk';
-const IOS_IPA_URL = 'YOUR_IOS_IPA_URL'; // Will be updated after iOS build
-
 const androidDownloadBtn = document.getElementById('androidDownload');
-const iosDownloadBtn = document.getElementById('iosDownload');
-
-// Check if download URLs are set
-if (ANDROID_APK_URL !== 'YOUR_ANDROID_APK_URL') {
-    androidDownloadBtn.href = ANDROID_APK_URL;
-} else {
-    androidDownloadBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Android build is being prepared. Please check back soon!');
-    });
-}
-
-if (IOS_IPA_URL !== 'YOUR_IOS_IPA_URL') {
-    iosDownloadBtn.href = IOS_IPA_URL;
-} else {
-    iosDownloadBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('iOS build is being prepared. Please check back soon!');
-    });
-}
 
 // Add fade-in animation on scroll
 const observerOptions = {
@@ -86,5 +63,6 @@ function trackDownload(platform) {
     // Add your analytics code here if needed
 }
 
-androidDownloadBtn.addEventListener('click', () => trackDownload('Android'));
-iosDownloadBtn.addEventListener('click', () => trackDownload('iOS'));
+if (androidDownloadBtn) {
+    androidDownloadBtn.addEventListener('click', () => trackDownload('Android'));
+}

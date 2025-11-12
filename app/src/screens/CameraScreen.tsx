@@ -52,6 +52,11 @@ export function CameraScreen() {
           style={styles.tapOverlay}
           onPress={handleTap}
         >
+          {!isCapturing && (
+            <View style={styles.instructionContainer}>
+              <Text style={styles.instructionText}>Tap anywhere to capture color</Text>
+            </View>
+          )}
           {isCapturing && (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color="#fff" />
@@ -105,6 +110,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     padding: 20,
     borderRadius: 50,
+  },
+  instructionContainer: {
+    position: 'absolute',
+    top: '45%',
+    width: '100%',
+    alignItems: 'center',
+  },
+  instructionText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: '500',
+    textAlign: 'center',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
   },
   errorContainer: {
     position: 'absolute',

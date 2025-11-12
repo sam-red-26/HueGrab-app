@@ -1,5 +1,28 @@
 // imageUtils tests - Color extraction from images
 
+// Mock expo-image-manipulator
+jest.mock('expo-image-manipulator', () => ({
+  manipulateAsync: jest.fn().mockResolvedValue({
+    uri: 'mock://cropped-image',
+    width: 3,
+    height: 3,
+  }),
+  SaveFormat: {
+    PNG: 'png',
+  },
+}));
+
+// Mock react-native-image-colors
+jest.mock('react-native-image-colors', () => ({
+  __esModule: true,
+  default: {
+    getColors: jest.fn().mockResolvedValue({
+      platform: 'android',
+      dominant: '#FF5733',
+    }),
+  },
+}));
+
 describe('imageUtils - color extraction', () => {
   describe('getPixelColor', () => {
     it('should extract RGBA values from pixel data', () => {

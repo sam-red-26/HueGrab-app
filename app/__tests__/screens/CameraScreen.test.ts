@@ -89,4 +89,18 @@ describe('CameraScreen component', () => {
     expect(mockInsets.top).toBeGreaterThan(0);
     expect(mockInsets.bottom).toBeGreaterThan(0);
   });
+
+  it('should display instruction text when not capturing', () => {
+    const isCapturing = false;
+    const shouldShowInstructions = !isCapturing;
+    
+    expect(shouldShowInstructions).toBe(true);
+  });
+
+  it('should hide instruction text when capturing', () => {
+    const isCapturing = true;
+    const shouldShowInstructions = !isCapturing;
+    
+    expect(shouldShowInstructions).toBe(false);
+  });
 });

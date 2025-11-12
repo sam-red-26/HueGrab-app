@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as Sharing from 'expo-sharing';
+import { Share } from 'react-native';
 
 interface UseShareResult {
   shareColor: (hex: string, rgb: string) => Promise<void>;
@@ -17,25 +17,21 @@ export function useShare(): UseShareResult {
     try {
       setIsSharing(true);
 
-      // Check if sharing is available
-      const isAvailable = await Sharing.isAvailableAsync();
-      
-      if (!isAvailable) {
-        console.warn('Sharing is not available on this device');
-        return;
-      }
-
-      // Create share message
       const message = `Color captured with HueGrab:\n\nHEX: ${hex}\nRGB: ${rgb}`;
 
-      // Share as text (requires a temporary file approach or use Share API)
-      // For now, we'll log - in production, use proper sharing
-      console.log('Sharing:', message);
-      
-      // Note: expo-sharing requires a file URI
-      // For text sharing, we would need to use React Native's Share API instead
-      // This is a limitation we'll address in the implementation
-      
+      const result = await Share.share({
+        message: message,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Shared with activity type:', result.activityType);
+        } else {
+          console.log('Shared successfully');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Share dismissed');
+      }
     } catch (error) {
       console.error('Failed to share:', error);
     } finally {

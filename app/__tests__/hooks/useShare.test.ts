@@ -1,5 +1,16 @@
 // useShare hook tests
 
+// Mock Share from react-native
+jest.mock('react-native', () => ({
+  Share: {
+    share: jest.fn().mockResolvedValue({
+      action: 'sharedAction',
+    }),
+    sharedAction: 'sharedAction',
+    dismissedAction: 'dismissedAction',
+  },
+}));
+
 describe('useShare hook', () => {
   it('should have correct return structure', () => {
     type UseShareResult = {

@@ -1,5 +1,22 @@
 // useColorCapture hook tests
 
+// Mock Dimensions from react-native
+jest.mock('react-native', () => ({
+  Dimensions: {
+    get: jest.fn().mockReturnValue({ width: 400, height: 800 }),
+  },
+}));
+
+// Mock imageUtils
+jest.mock('../../src/utils/imageUtils', () => ({
+  extractColorFromImage: jest.fn().mockResolvedValue({
+    hex: '#FF5733',
+    rgb: 'RGB(255, 87, 51)',
+    rgbValues: { r: 255, g: 87, b: 51 },
+  }),
+  translateTapToImageCoords: jest.fn().mockReturnValue({ x: 480, y: 270 }),
+}));
+
 describe('useColorCapture hook', () => {
   it('should have correct state structure', () => {
     type ColorCaptureState = {

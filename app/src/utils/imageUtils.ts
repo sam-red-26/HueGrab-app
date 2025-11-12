@@ -2,7 +2,8 @@
  * Utility functions for image processing and color extraction
  */
 
-import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
+import * as ImageManipulator from 'expo-image-manipulator';
+import ImageColors from 'react-native-image-colors';
 import { rgbaToHex, rgbaToRgbString } from './colorUtils';
 import { ColorResult, RGBAColor } from '../types/color';
 
@@ -27,26 +28,14 @@ export async function extractColorFromImage(
     const clampedX = Math.max(0, Math.min(imageWidth - 1, Math.round(x)));
     const clampedY = Math.max(0, Math.min(imageHeight - 1, Math.round(y)));
 
-    // Crop a 1x1 pixel at the target coordinate
-    const result = await manipulateAsync(
+    // Get the pixel color at the specified coordinates
+    const pixelColor = await getPixelColorFromUri(
       imageUri,
-      [
-        {
-          crop: {
-            originX: clampedX,
-            originY: clampedY,
-            width: 1,
-            height: 1,
-          },
-        },
-      ],
-      { format: SaveFormat.PNG }
+      clampedX,
+      clampedY,
+      imageWidth,
+      imageHeight
     );
-
-    // For now, we'll use a simplified approach
-    // In a real implementation, we'd read the pixel data from the cropped image
-    // This is a placeholder that will work with the camera integration
-    const pixelColor = await getPixelColorFromUri(result.uri);
 
     return convertRGBAToColorResult(pixelColor);
   } catch (error) {
@@ -56,24 +45,69 @@ export async function extractColorFromImage(
 }
 
 /**
- * Gets pixel color from a 1x1 image URI
- * Note: This is a simplified implementation for the MVP
- * A production version would use canvas or native modules for actual pixel reading
+ * Gets pixel color from an image at specific coordinates
+ * Uses expo-image-manipulator to crop a small area and react-native-image-colors to extract the color
  */
-async function getPixelColorFromUri(uri: string): Promise<RGBAColor> {
-  // This is a placeholder implementation
-  // In a real app, you'd use expo-gl or react-native-image-colors
-  // For MVP, we'll return a mock color that can be replaced with actual implementation
-  
-  // TODO: Implement actual pixel reading using expo-gl or native module
-  console.warn('Using mock pixel color - implement actual pixel reading for production');
-  
-  return {
-    r: 128,
-    g: 128,
-    b: 128,
-    a: 255,
-  };
+async function getPixelColorFromUri(
+  uri: string,
+  x: number,
+  y: number,
+  imageWidth: number,
+  imageHeight: number
+): Promise<RGBAColor> {
+  try {
+    // Ensure coordinates are within bounds
+    const clampedX = Math.max(0, Math.min(Math.floor(x), imageWidth - 1));
+    const clampedY = Math.max(0, Math.min(Math.floor(y), imageHeight - 1));
+
+    // Crop a small area around the target pixel (3x3 to be safe)
+    const cropSize = 3;
+    const cropX = Math.max(0, clampedX - Math.floor(cropSize / 2));
+    const cropY = Math.max(0, clampedY - Math.floor(cropSize / 2));
+    
+    const croppedImage = await ImageManipulator.manipulateAsync(
+      uri,
+      [
+        {
+          crop: {
+            originX: cropX,
+            originY: cropY,
+            width: cropSize,
+            height: cropSize,
+          },
+        },
+      ],
+      { format: ImageManipulator.SaveFormat.PNG }
+    );
+
+    // Extract the dominant color from this tiny crop
+    const result = await ImageColors.getColors(croppedImage.uri, {
+      fallback: '#808080',
+      cache: false,
+      key: `${uri}-${clampedX}-${clampedY}`,
+    });
+
+    let hexColor = '#808080';
+    
+    if (result.platform === 'android') {
+      hexColor = result.dominant;
+    } else if (result.platform === 'ios') {
+      hexColor = result.primary;
+    } else if (result.platform === 'web') {
+      hexColor = result.dominant;
+    }
+
+    // Convert hex to RGB
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+
+    return { r, g, b, a: 255 };
+  } catch (error) {
+    console.error('Error extracting pixel color:', error);
+    return { r: 128, g: 128, b: 128, a: 255 };
+  }
 }
 
 /**
@@ -107,13 +141,27 @@ export function convertRGBAToColorResult(rgba: RGBAColor): ColorResult {
 
 /**
  * Translates screen tap coordinates to image space
- * @param screenX - X coordinate in screen space
- * @param screenY - Y coordinate in screen space
- * @param screenWidth - Width of the screen/view
- * @param screenHeight - Height of the screen/view
- * @param imageWidth - Width of the captured image
- * @param imageHeight - Height of the captured image
+ * @param tapPosition - Tap coordinates {x, y}
+ * @param screenDimensions - Screen dimensions {width, height}
+ * @param imageDimensions - Image dimensions {width, height}
  * @returns Translated coordinates in image space
+ */
+export function translateTapToImageCoords(
+  tapPosition: { x: number; y: number },
+  screenDimensions: { width: number; height: number },
+  imageDimensions: { width: number; height: number }
+): { x: number; y: number } {
+  const scaleX = imageDimensions.width / screenDimensions.width;
+  const scaleY = imageDimensions.height / screenDimensions.height;
+
+  return {
+    x: Math.round(tapPosition.x * scaleX),
+    y: Math.round(tapPosition.y * scaleY),
+  };
+}
+
+/**
+ * @deprecated Use translateTapToImageCoords instead
  */
 export function translateCoordinates(
   screenX: number,

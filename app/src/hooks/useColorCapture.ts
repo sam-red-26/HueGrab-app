@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
 import { CameraView } from 'expo-camera';
+import { Dimensions } from 'react-native';
 import { ColorResult } from '../types/color';
-import { extractColorFromImage } from '../utils/imageUtils';
+import { extractColorFromImage, translateTapToImageCoords } from '../utils/imageUtils';
 
 interface UseColorCaptureResult {
   colorResult: ColorResult | null;
@@ -45,17 +46,20 @@ export function useColorCapture(): UseColorCaptureResult {
       }
 
       // Extract color at tap coordinates
-      // Note: For MVP, we'll use a simplified approach
-      // The image dimensions from takePictureAsync are typically full sensor resolution
-      const imageWidth = photo.width || 1920;
-      const imageHeight = photo.height || 1080;
+      // Translate screen coordinates to image coordinates
+      const screenDimensions = Dimensions.get('screen');
+      const translatedCoords = translateTapToImageCoords(
+        { x, y },
+        { width: screenDimensions.width, height: screenDimensions.height },
+        { width: photo.width, height: photo.height }
+      );
 
       const result = await extractColorFromImage(
         photo.uri,
-        x,
-        y,
-        imageWidth,
-        imageHeight
+        translatedCoords.x,
+        translatedCoords.y,
+        photo.width,
+        photo.height
       );
 
       setColorResult(result);

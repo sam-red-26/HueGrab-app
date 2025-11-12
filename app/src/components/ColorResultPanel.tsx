@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable, Modal } from 'react-native';
 import { ColorResult } from '../types/color';
 import { useClipboard } from '../hooks/useClipboard';
 import { useShare } from '../hooks/useShare';
+import { useHaptics } from '../hooks/useHaptics';
 
 interface ColorResultPanelProps {
   colorResult: ColorResult;
@@ -12,16 +13,22 @@ interface ColorResultPanelProps {
 export function ColorResultPanel({ colorResult, onDismiss }: ColorResultPanelProps) {
   const { copyToClipboard, copied } = useClipboard();
   const { shareColor, isSharing } = useShare();
+  const { triggerLight, triggerSuccess } = useHaptics();
 
   const handleCopyHex = async () => {
+    triggerLight();
     await copyToClipboard(colorResult.hex);
+    triggerSuccess();
   };
 
   const handleCopyRgb = async () => {
+    triggerLight();
     await copyToClipboard(colorResult.rgb);
+    triggerSuccess();
   };
 
   const handleShare = async () => {
+    triggerLight();
     await shareColor(colorResult.hex, colorResult.rgb);
   };
 

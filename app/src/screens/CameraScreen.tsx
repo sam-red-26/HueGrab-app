@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Pressable, ActivityIndicator, useWindowDimensions, Text } from 'react-native';
 import { CameraView } from 'expo-camera';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorCapture } from '../hooks/useColorCapture';
 import { ColorResultPanel } from '../components/ColorResultPanel';
+import { CaptureAnimation } from '../components/CaptureAnimation';
+import { useHaptics } from '../hooks/useHaptics';
 
 export function CameraScreen() {
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const { cameraRef, isCapturing, colorResult, error, captureColor, clearResult } = useColorCapture();
+  const { triggerLight, triggerSuccess } = useHaptics();
+  const [showFlash, setShowFlash] = useState(false);
 
   const handleTap = async (event: any) => {
     if (isCapturing) return;
@@ -16,11 +20,22 @@ export function CameraScreen() {
 
     console.log('Tapped at coordinates:', locationX, locationY);
     
+    // Trigger haptic feedback and flash animation
+    triggerLight();
+    setShowFlash(true);
+    
     await captureColor(locationX, locationY, screenWidth, screenHeight);
   };
 
   const handleDismiss = () => {
     clearResult();
+  };
+
+  const handleAnimationComplete = () => {
+    setShowFlash(false);
+    if (colorResult) {
+      triggerSuccess();
+    }
   };
 
   return (
@@ -43,6 +58,12 @@ export function CameraScreen() {
             </View>
           )}
         </Pressable>
+
+        {/* Capture Flash Animation */}
+        <CaptureAnimation 
+          isVisible={showFlash} 
+          onAnimationComplete={handleAnimationComplete}
+        />
 
         {/* Error display */}
         {error && (

@@ -3,6 +3,7 @@
     "name": "HueGrab",
     "slug": "huegrab",
     "version": "1.0.0",
+    "description": "A minimalist color picker app that captures real-world colors with a single tap using your phone's camera.",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",

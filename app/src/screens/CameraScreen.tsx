@@ -3,10 +3,11 @@ import { View, StyleSheet, Pressable, ActivityIndicator, useWindowDimensions, Te
 import { CameraView } from 'expo-camera';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorCapture } from '../hooks/useColorCapture';
+import { ColorResultPanel } from '../components/ColorResultPanel';
 
 export function CameraScreen() {
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
-  const { cameraRef, isCapturing, colorResult, error, captureColor } = useColorCapture();
+  const { cameraRef, isCapturing, colorResult, error, captureColor, clearResult } = useColorCapture();
 
   const handleTap = async (event: any) => {
     if (isCapturing) return;
@@ -16,6 +17,10 @@ export function CameraScreen() {
     console.log('Tapped at coordinates:', locationX, locationY);
     
     await captureColor(locationX, locationY, screenWidth, screenHeight);
+  };
+
+  const handleDismiss = () => {
+    clearResult();
   };
 
   return (
@@ -39,15 +44,6 @@ export function CameraScreen() {
           )}
         </Pressable>
 
-        {/* Temporary color result display - will be replaced with ColorResultPanel in Phase 5 */}
-        {colorResult && (
-          <View style={styles.tempResultContainer}>
-            <View style={[styles.colorPreview, { backgroundColor: colorResult.hex }]} />
-            <Text style={styles.colorText}>{colorResult.hex}</Text>
-            <Text style={styles.colorText}>{colorResult.rgb}</Text>
-          </View>
-        )}
-
         {/* Error display */}
         {error && (
           <View style={styles.errorContainer}>
@@ -55,6 +51,14 @@ export function CameraScreen() {
           </View>
         )}
       </View>
+
+      {/* Color Result Panel */}
+      {colorResult && (
+        <ColorResultPanel 
+          colorResult={colorResult} 
+          onDismiss={handleDismiss} 
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -80,30 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     padding: 20,
     borderRadius: 50,
-  },
-  tempResultContainer: {
-    position: 'absolute',
-    bottom: 40,
-    left: 20,
-    right: 20,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    padding: 20,
-    borderRadius: 12,
-    alignItems: 'center',
-  },
-  colorPreview: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginBottom: 12,
-    borderWidth: 2,
-    borderColor: '#fff',
-  },
-  colorText: {
-    color: '#fff',
-    fontSize: 16,
-    marginVertical: 4,
-    fontWeight: '600',
   },
   errorContainer: {
     position: 'absolute',

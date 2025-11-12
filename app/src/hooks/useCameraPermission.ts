@@ -1,10 +1,10 @@
-import { Camera, CameraPermissionResponse } from 'expo-camera';
+import { useCameraPermissions, PermissionResponse } from 'expo-camera';
 
 export interface CameraPermissionHook {
-  permission: CameraPermissionResponse | null;
+  permission: PermissionResponse | null;
   isGranted: boolean;
   canAskAgain: boolean;
-  requestPermission: () => Promise<CameraPermissionResponse>;
+  requestPermission: () => Promise<PermissionResponse>;
 }
 
 /**
@@ -12,7 +12,7 @@ export interface CameraPermissionHook {
  * @returns Camera permission state and request function
  */
 export function useCameraPermission(): CameraPermissionHook {
-  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [permission, requestPermission] = useCameraPermissions();
 
   return {
     permission,

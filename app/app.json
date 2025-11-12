@@ -28,7 +28,8 @@
       "buildNumber": "1",
       "infoPlist": {
         "NSCameraUsageDescription": "Allow HueGrab to access your camera to capture colors from real-world objects.",
-        "UIStatusBarStyle": "UIStatusBarStyleLightContent"
+        "UIStatusBarStyle": "UIStatusBarStyleLightContent",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {

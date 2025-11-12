@@ -14,8 +14,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Update download links when builds are ready
 // Replace these URLs with actual build download URLs after building
-const ANDROID_APK_URL = 'YOUR_ANDROID_APK_URL'; // Will be updated after build
-const IOS_IPA_URL = 'YOUR_IOS_IPA_URL'; // Will be updated after build
+const ANDROID_APK_URL = 'https://github.com/sam-red-26/HueGrab-app/releases/download/HueGrab_v1.0.0/HueGrab_android_1.0.apk';
+const IOS_IPA_URL = 'YOUR_IOS_IPA_URL'; // Will be updated after iOS build
 
 const androidDownloadBtn = document.getElementById('androidDownload');
 const iosDownloadBtn = document.getElementById('iosDownload');

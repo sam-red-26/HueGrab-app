@@ -4,6 +4,7 @@
     "slug": "huegrab",
     "version": "1.0.0",
     "description": "A minimalist color picker app that captures real-world colors with a single tap using your phone's camera.",
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -19,21 +20,40 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.samred26.huegrab",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow HueGrab to access your camera to capture colors from real-world objects.",
+        "UIStatusBarStyle": "UIStatusBarStyleLightContent"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000000"
       },
+      "package": "com.samred26.huegrab",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "scheme": "huegrab",
+    "owner": "transform.renew",
+    "extra": {
+      "eas": {
+        "projectId": "50653390-4496-4f63-b1ac-c2abbb7c2dff"
+      }
     }
   }
 }

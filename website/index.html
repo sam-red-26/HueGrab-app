@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HueGrab - Capture real-world colors instantly with your camera. Get HEX and RGB codes with a single tap.">
+    <meta name="keywords" content="color picker, hex code, rgb, camera, mobile app, color capture">
+    <meta name="author" content="sam-red-26">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HueGrab - Instant Color Picker">
+    <meta property="og:description" content="Capture real-world colors with a single tap. Get instant HEX and RGB codes.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="HueGrab - Instant Color Picker">
+    <meta property="twitter:description" content="Capture real-world colors with a single tap. Get instant HEX and RGB codes.">
+    
+    <title>HueGrab - Instant Color Picker</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <nav class="nav">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">
+                        <span class="logo-icon">🎨</span>
+                        <span class="logo-text">HueGrab</span>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#features">Features</a>
+                        <a href="#download">Download</a>
+                        <a href="#about">About</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Capture Colors<br>
+                    <span class="gradient-text">From The Real World</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Point your camera at any object, tap to capture, and instantly get HEX and RGB color codes. Simple, fast, and beautiful.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Now
+                    </a>
+                    <a href="https://github.com/sam-red-26/HueGrab-app" class="btn btn-secondary" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="demo-color" id="demoColor"></div>
+                            <div class="demo-text">
+                                <p class="demo-instruction">Tap anywhere to capture color</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why HueGrab?</h2>
+            <p class="section-subtitle">Everything you need in a color picker, nothing you don't</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Capture</h3>
+                    <p>One tap to capture any color from your camera view. No complex settings or menus.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Perfect Accuracy</h3>
+                    <p>Get exact HEX and RGB codes from the precise point you tap on screen.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Copy & Share</h3>
+                    <p>Copy color codes to clipboard or share with others in one tap.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Haptic Feedback</h3>
+                    <p>Feel every interaction with subtle haptic feedback for better UX.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>Beautiful Design</h3>
+                    <p>Clean, minimalist interface that stays out of your way.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy First</h3>
+                    <p>No data collection, no tracking, no accounts. Your privacy is guaranteed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Open Camera</h3>
+                    <p>Launch HueGrab and point your camera at any object</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Tap to Capture</h3>
+                    <p>Tap anywhere on the screen to capture the color at that point</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Copy & Use</h3>
+                    <p>Get HEX and RGB codes instantly. Copy or share with one tap</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title">Download HueGrab</h2>
+            <p class="section-subtitle">Available for Android and iOS</p>
+            
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.523 15.341l-.54-.54a.75.75 0 00-1.061 1.061l.54.54c.316.316.316.829 0 1.145-.316.316-.829.316-1.145 0l-.54-.54a.75.75 0 00-1.061 1.061l.54.54a2.287 2.287 0 003.267 0 2.287 2.287 0 000-3.267z"/>
+                            <path d="M1.5 4.42c0-1.018.826-1.844 1.844-1.844h6.75c.414 0 .75.336.75.75s-.336.75-.75.75h-6.75a.344.344 0 00-.344.344v15.164c0 .19.154.344.344.344h6.75a.75.75 0 010 1.5h-6.75A1.844 1.844 0 011.5 19.584V4.42z"/>
+                            <path d="M17.25 12c0-.966-.783-1.75-1.75-1.75h-5.25v-4.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75v4.5h-1.5a.75.75 0 000 1.5h1.5v4.5c0 .414.336.75.75.75s.75-.336.75-.75v-4.5h5.25c.138 0 .25.112.25.25v7.5a.25.25 0 01-.25.25h-3a.75.75 0 000 1.5h3c.966 0 1.75-.784 1.75-1.75V12z"/>
+                        </svg>
+                    </div>
+                    <h3>Android</h3>
+                    <p class="version">Version 1.0.0</p>
+                    <a href="#" id="androidDownload" class="btn btn-download" download>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download APK
+                    </a>
+                    <p class="download-note">Direct APK installation • ~50 MB</p>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                    </div>
+                    <h3>iOS</h3>
+                    <p class="version">Version 1.0.0</p>
+                    <a href="#" id="iosDownload" class="btn btn-download" download>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download IPA
+                    </a>
+                    <p class="download-note">Requires AltStore or similar • ~50 MB</p>
+                </div>
+            </div>
+            
+            <div class="install-instructions">
+                <h3>Installation Instructions</h3>
+                <div class="instructions-grid">
+                    <div class="instruction">
+                        <h4>📱 Android</h4>
+                        <ol>
+                            <li>Download the APK file</li>
+                            <li>Enable "Install from Unknown Sources" in Settings</li>
+                            <li>Open the APK and tap Install</li>
+                            <li>Launch HueGrab and grant camera permission</li>
+                        </ol>
+                    </div>
+                    <div class="instruction">
+                        <h4>🍎 iOS</h4>
+                        <ol>
+                            <li>Install AltStore from altstore.io</li>
+                            <li>Download the IPA file</li>
+                            <li>Open in AltStore and tap Install</li>
+                            <li>Trust the developer certificate in Settings</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About HueGrab</h2>
+            <div class="about-content">
+                <p>
+                    HueGrab was built with a simple philosophy: color picking should be effortless. 
+                    Whether you're a designer matching colors from physical objects, an artist seeking 
+                    inspiration, or a developer needing exact color codes, HueGrab makes it instant.
+                </p>
+                <p>
+                    Built with React Native and Expo, HueGrab is open source and privacy-focused. 
+                    No ads, no tracking, no data collection. Just a simple tool that does one thing well.
+                </p>
+                
+                <div class="tech-stack">
+                    <h3>Built With</h3>
+                    <div class="tech-badges">
+                        <span class="badge">React Native</span>
+                        <span class="badge">Expo</span>
+                        <span class="badge">TypeScript</span>
+                        <span class="badge">Jest</span>
+                    </div>
+                </div>
+                
+                <div class="cta">
+                    <a href="https://github.com/sam-red-26/HueGrab-app" class="btn btn-secondary" target="_blank" rel="noopener">
+                        View Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🎨</span>
+                    <span class="logo-text">HueGrab</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/sam-red-26/HueGrab-app" target="_blank" rel="noopener">GitHub</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="mailto:support@huegrab.com">Contact</a>
+                </div>
+                <p class="footer-copyright">
+                    © 2025 HueGrab. Open Source under MIT License.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

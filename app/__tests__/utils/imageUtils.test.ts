@@ -4,22 +4,12 @@
 jest.mock('expo-image-manipulator', () => ({
   manipulateAsync: jest.fn().mockResolvedValue({
     uri: 'mock://cropped-image',
-    width: 3,
-    height: 3,
+    width: 1,
+    height: 1,
+    base64: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==', // Red pixel
   }),
   SaveFormat: {
     PNG: 'png',
-  },
-}));
-
-// Mock react-native-image-colors
-jest.mock('react-native-image-colors', () => ({
-  __esModule: true,
-  default: {
-    getColors: jest.fn().mockResolvedValue({
-      platform: 'android',
-      dominant: '#FF5733',
-    }),
   },
 }));
 
